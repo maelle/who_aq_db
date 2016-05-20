@@ -49,15 +49,21 @@ sum(grepl("pre-urban", data$PM25_stations))
 ##################################################################
 # Geocoding
 ##################################################################
-test <- opencage_forward(placename = "Onitsha", country = "NG")$results
-# if several results, take the one with components._type == city
-mtcars %>%
-  split(.$cyl) %>%
-  map(~ lm(mpg ~ wt, data = .)) %>%
-  map(summary) %>%
-  map_dbl("r.squared")
-
-
+data <- mutate(data,
+               latitude = 100,
+               longitude = 100)
+# take the first one, shouldn't be far away and ok at this scale!
+for(i in 1:nrow(data)){
+  print(i)
+  results <- opencage_forward(placename = data$City[i],
+                              country = data$countrycode[i])$results
+  if(!is.null(results)){
+    data$latitude[i] <- results$geometry.lat[1]
+    data$longitude[i] <- results$geometry.lng[1]
+  }
+  
+}
+save(data, file = "who_aq_data.RData")
 ##################################################################
 # Visualization
 ##################################################################
