@@ -3,6 +3,7 @@ library("dplyr")
 library("tidyr")
 library("opencage")
 library("countrycode")
+library("purrr")
 file <- "data/WHO_AAP_database_May2016_v3web.xlsx"
 data <- read.xlsx(file, sheet = 2, startRow = 3)
 data <- tbl_df(data)
@@ -44,3 +45,23 @@ sum(grepl("pre-urban", data$PM25_stations))
 # residential
 # commercial
 # rural
+
+##################################################################
+# Geocoding
+##################################################################
+test <- opencage_forward(placename = "Onitsha", country = "NG")$results
+# if several results, take the one with components._type == city
+mtcars %>%
+  split(.$cyl) %>%
+  map(~ lm(mpg ~ wt, data = .)) %>%
+  map(summary) %>%
+  map_dbl("r.squared")
+
+
+##################################################################
+# Visualization
+##################################################################
+# 2 maps, 1 for PM10 and 1 for PM25
+# for cities with *measured* data
+# colour depending on year of data
+
