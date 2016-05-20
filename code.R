@@ -3,7 +3,6 @@ library("dplyr")
 library("tidyr")
 library("opencage")
 library("countrycode")
-library("purrr")
 file <- "data/WHO_AAP_database_May2016_v3web.xlsx"
 data <- read.xlsx(file, sheet = 2, startRow = 3)
 data <- tbl_df(data)
