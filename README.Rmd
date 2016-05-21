@@ -17,7 +17,7 @@ The database has at least two limitations (although it is a very good compilatio
 
 * Not all countries are represented, since some of them do not monitor these pollutants or do not make the data available.
 
-* Because of the delay in countries publishing their air pollution figures, or because the last available figures are from an external study (for instance an occupational health work about Swedish soldiers for one city in Afghanistan), the year from which the data originate is often not 2015 or even not 2014. This was noted for instance in [this artiche of The Hindu](http://www.thehindu.com/news/cities/Delhi/outdated-data-misleading-experts/article8598361.ece?utm_source=RSS_Feed&utm_medium=RSS&utm_campaign=RSS_Syndication&utm_source=twitterfeed&utm_medium=twitter), or [this blog post of OpenAQ](https://medium.com/@openaq/surprising-make-up-of-yearly-air-quality-data-from-most-recent-who-report-61ae780df2ce#.8f4n8g6fd).
+* Because of the delay in countries publishing their air pollution figures, or because the last available figures are from an external study (for instance an occupational health work about Swedish soldiers for one city in Afghanistan), the year from which the data originate is often not 2015 or even not 2014. This was noted for instance in [this article of The Hindu](http://www.thehindu.com/news/cities/Delhi/outdated-data-misleading-experts/article8598361.ece?utm_source=RSS_Feed&utm_medium=RSS&utm_campaign=RSS_Syndication&utm_source=twitterfeed&utm_medium=twitter), and [this blog post of OpenAQ](https://medium.com/@openaq/surprising-make-up-of-yearly-air-quality-data-from-most-recent-who-report-61ae780df2ce#.8f4n8g6fd).
 
 I decided to make a map showing that
 
@@ -41,4 +41,22 @@ The database compiles information about PM2.5 and PM10. In some cases the concen
 
 Interestingly the year was not always an integer, for Delhi in India it is "2013.2". Therefore I rounded years with the `floor` function.
 
-# Maps1
+# Maps!
+
+![alt text](PM10.PNG)
+
+
+![alt text](PM25.PNG)
+
+
+Take-home messages:
+
+* Some countries seem to rather monitor PM10.
+
+* There is a big lack of data in many countries, in particular in low income countries.
+
+* The data can be quite old in some cases. This is why [OpenAQ](https://openaq.org/) efforts for building the first world-wide open air quality data hub are so awesome! Have a look at their data, e.g. with the [R package ropenaq](https://github.com/ropenscilabs/ropenaq).
+
+# Use the data!
+
+The data is saved as [RData](who_aq_data2.RData) and [csv](WHO_AQ_data_geocoded.csv). Feel free to use it while stating it's WHO data, and tell me if you have ideas of how to use them, I'd be glad to see your work!

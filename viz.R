@@ -13,7 +13,9 @@ library("viridis")
 library("rworldmap")
 
 map.world <- map_data(map="world")
-gg <- ggplot() + geom_map(data=map.world, map=map.world, aes(map_id=region, x=long, y=lat))
+gg <- ggplot() + geom_map(data=map.world, map=map.world,
+                          aes(map_id=region, x=long, y=lat),
+                          fill = "grey60")
 
 dataPM25 <- mutate(data, PM25_year = floor(PM25_year)) %>%
   mutate(PM25_year = as.factor(PM25_year)) %>%
@@ -28,11 +30,12 @@ gg2 <- gg+
         axis.title.y=element_blank(),
         panel.background=element_blank(),panel.border=element_blank(),panel.grid.major=element_blank(),
         panel.grid.minor=element_blank(),plot.background=element_blank())+
-  ggtitle("WHO PM2.5 data") +
+  labs(title = "Sources of PM2.5 Data for the WHO 2016 report",
+       subtitle = "Cities in the WHO Global Urban Ambient Air Pollution Database were geocoded\n using the OpenCage Geocoder with the R package opencage.\n Colours of points indicate the year from which the data originate.") +
   scale_color_viridis(option = "magma", discrete = TRUE) +
   theme(plot.title = element_text(lineheight=1, face="bold"))
 
-ggsave(gg2, file = "PM25.PNG", width = 12, height = 12)
+ggsave(gg2, file = "PM25.PNG", width = 6)
 
  ######################
 dataPM10 <- mutate(data, PM10_year = floor(PM10_year)) %>%
@@ -48,8 +51,9 @@ gg2 <- gg+
         axis.title.y=element_blank(),
         panel.background=element_blank(),panel.border=element_blank(),panel.grid.major=element_blank(),
         panel.grid.minor=element_blank(),plot.background=element_blank())+
-  ggtitle("WHO PM10 data") +
+  labs(title = "Sources of PM10 Data for the WHO 2016 report",
+       subtitle = "Cities in the WHO Global Urban Ambient Air Pollution Database were geocoded\n using the OpenCage Geocoder with the R package opencage.\n Colours of points indicate the year from which the data originate.") +
   scale_color_viridis(option = "magma", discrete = TRUE) +
   theme(plot.title = element_text(lineheight=1, face="bold"))
 
-ggsave(gg2, file = "PM10.PNG", width = 12, height = 12)
+ggsave(gg2, file = "PM10.PNG", width = 6)
