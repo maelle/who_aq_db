@@ -63,10 +63,3 @@ for(i in 1:nrow(data)){
   
 }
 save(data, file = "who_aq_data.RData")
-##################################################################
-# Visualization
-##################################################################
-# 2 maps, 1 for PM10 and 1 for PM25
-# for cities with *measured* data
-# colour depending on year of data
-
