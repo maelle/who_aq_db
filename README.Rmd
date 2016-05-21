@@ -9,6 +9,8 @@ output:
 A Look at the Update 2016 of the WHO Global Urban Ambient Air Pollution Database
 ================================================================================
 
+# Introduction
+
 The WHO has recently published an update of its database about PM2.5 and PM10 ambient average annual concentrations in many cities of the world. The database can be found [on this website](http://www.who.int/phe/health_topics/outdoorair/databases/cities/en/) along with documentation and analyses.
 
 The database has at least two limitations (although it is a very good compilation of data!):
@@ -25,7 +27,18 @@ I decided to make a map showing that
 
 For this, I had to geocode all cities in the database, which I did using the [opencage R package](https://github.com/ropenscilabs/opencage) (it's on [CRAN](https://cran.r-project.org/web/packages/opencage/index.html) too) for the [OpenCage Geocoder](https://geocoder.opencagedata.com/)
 
+# Geocoding with OpenCage Geocoder in R
+
 In the file [data_prep1.R](data_prep1.R) I transformed the 3-letter ISO code of the country in the two-letter ISO code using the R package [countrycode](https://cran.r-project.org/web/packages/countrycode/index.html), and then I used the `opencage_forward` function with the city as `placename` and the country code as `country`. When the results had more than one line I took the first one, since at this scale I do not care whether I get the city itself or its airport. Out of 2973 cities, only 7 could not be geolocated this way so I added their coordinates per hand in [data_prep2.R](data_prep2.R). For instance I could not find "Nabih Saleh" in Bahrain as such, but searching for "Saleh" I could locate it, or on [this website](http://nelson.govt.nz/environment/air-quality/air-monitoring/airsheds-in-nelson/) I could understand that "Nelson Airshed A" was in Nelson.
 
 Maybe I could have used the ID.WHO.city for geolocation instead but I realized this afterwards and I do not know what this ID is.
 
+# Data selection for the maps
+
+The database compiles information about PM2.5 and PM10. In some cases the concentration given for PM2.5 is not measured but converted from the PM10 concentration and vice versa. Therefore for the PM25 map I for instance chose only the *measured data*.
+
+# Year of the data
+
+Interestingly the year was not always an integer, for Delhi in India it is "2013.2". Therefore I rounded years with the `floor` function.
+
+# Maps1
